@@ -1,30 +1,21 @@
 package com;
 
-import com.googlecode.totallylazy.Sequence;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by apurvagu on 16/12/16.
  */
 public class SearchEngine {
-    private String key;
-    private WebPages webPages;
+    private Queries queries;
+    private WebAppPages webAppPages;
 
-    public SearchEngine(String key, WebPages webPages) {
-        this.key = key;
-        this.webPages = webPages;
+    public SearchEngine(Queries queries, WebAppPages webAppPages) {
+        this.queries = queries;
+        this.webAppPages = webAppPages;
     }
 
-    public List<String> search() {
-        Sequence<LcmeWebPage> lcmeWebPages = webPages.keyExists(key);
-        ArrayList<String> pageNumbers = new ArrayList<String>();
-        for (LcmeWebPage lcmeWebPage: lcmeWebPages){
-
-            pageNumbers.add(lcmeWebPage.getPageNumber());
-        }
-        return pageNumbers;
-
+    public Map search() {
+        Map result = queries.searchResultsIn(webAppPages);
+        return result;
     }
 }

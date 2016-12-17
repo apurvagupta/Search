@@ -5,18 +5,20 @@ import java.util.List;
 /**
  * Created by apurvagu on 16/12/16.
  */
-public class LcmeWebPage {
+public class WebAppPage extends Relevance {
 
     private List keywords;
     private Integer pageNumber;
+    private Integer relevance;
 
-    public LcmeWebPage(List keywords, Integer pageNumber) {
+    public WebAppPage(List keywords, Integer pageNumber) {
         this.keywords = keywords;
         this.pageNumber = pageNumber;
     }
 
-    public boolean keyExists(String key){
-        return keywords.contains(key);
+    public Integer queryRelevance(Query query){
+        relevance = calculateRelevance(query.getKeyWords(), keywords);
+        return relevance;
     }
 
 
