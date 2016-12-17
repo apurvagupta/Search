@@ -3,14 +3,14 @@ package com;
 import java.util.Collections;
 import java.util.List;
 
+import static com.SearchEngine.MAXIMUM_WEIGHT;
+
 /**
  * Created by apurvagu on 17/12/16.
  */
 public abstract class Relevance {
 
-    private final Integer RELEVANCE_CONST = 8;
     public Integer calculateRelevance(List queryKeywords, List webAppPageKeywords) {
-        Collections.disjoint(webAppPageKeywords, queryKeywords);
         return Collections.disjoint(webAppPageKeywords, queryKeywords)? 0 : calculate(queryKeywords, webAppPageKeywords);
     }
 
@@ -18,7 +18,7 @@ public abstract class Relevance {
         int relevance =0;
         for(String webAppPageKeyword:webAppPageKeywords){
             if(queryKeywords.contains(webAppPageKeyword)){
-                relevance += (RELEVANCE_CONST - queryKeywords.indexOf(webAppPageKeyword)) * (RELEVANCE_CONST - webAppPageKeywords.indexOf(webAppPageKeyword));
+                relevance += (MAXIMUM_WEIGHT - queryKeywords.indexOf(webAppPageKeyword)) * (MAXIMUM_WEIGHT - webAppPageKeywords.indexOf(webAppPageKeyword));
             }
         }
         return relevance;

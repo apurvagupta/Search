@@ -28,6 +28,54 @@ public class SearchEngineTest {
     }
 
     @Test
+    public void shouldNotTakeMoreWebPagesOrQueryThanMaximumWeight(){
+        //Maximum weight is hardCoded for now which is 8
+        List pageKeywords = Arrays.asList("Car", "Review", "Ford");
+        List pageKeywords1 = Arrays.asList("Car", "Review", "Ford", "Random", "Toyota","Rank", "Rate", "Price","Capacity","Kaise");
+
+        List queryKeywords = Arrays.asList("Car", "Kaise");
+        List queryKeywords1 = Arrays.asList("Capacity");
+
+        Query q1 = new Query(queryKeywords, 1);
+        Query q2 = new Query(queryKeywords1, 2);
+        Queries queries = new Queries(q1, q2);
+
+        WebAppPage webAppPage = new WebAppPage(pageKeywords, 1);
+        WebAppPage webAppPage1 = new WebAppPage(pageKeywords1, 2);
+        WebAppPages webAppPages = new WebAppPages(webAppPage, webAppPage1);
+
+        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+
+        Map resultPageNumbers = searchEngine.search();
+
+        List queryOneResult = (List) resultPageNumbers.get("Q1");
+        List queryTwoResult = (List) resultPageNumbers.get("Q2");
+
+        Assert.assertEquals(2, queryOneResult.size());
+        Assert.assertEquals("P1", queryOneResult.get(0));
+        Assert.assertEquals("P2", queryOneResult.get(1));
+
+        Assert.assertEquals(0, queryTwoResult.size());
+    }
+
+    @Test
+    public void shouldNotConsiderCaseOfQuery(){
+        List pageKeywords = Arrays.asList("Car", "Review", "Ford");
+        List queryKeywords = Arrays.asList("car");
+
+        Queries queries = new Queries(new Query(queryKeywords, 1));
+        WebAppPages webAppPages = new WebAppPages(new WebAppPage(pageKeywords, 1));
+
+        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+
+        Map resultPageNumbers = searchEngine.search();
+
+        List queryOneResult = (List) resultPageNumbers.get("Q1");
+        Assert.assertEquals(1, queryOneResult.size());
+        Assert.assertEquals("P1", queryOneResult.get(0));
+    }
+
+    @Test
     public void shouldReturnWebPagesWhenWebPageHasQueryString(){
         List pageKeywords = Arrays.asList("Car", "Review", "Ford");
         List queryKeywords = Arrays.asList("Car");

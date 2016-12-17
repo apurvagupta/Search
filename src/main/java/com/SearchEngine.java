@@ -8,6 +8,7 @@ import java.util.Map;
 public class SearchEngine {
     private Queries queries;
     private WebAppPages webAppPages;
+    public static final Integer MAXIMUM_WEIGHT = 8;
 
     public SearchEngine(Queries queries, WebAppPages webAppPages) {
         this.queries = queries;
