@@ -19,9 +19,9 @@ public class SearchEngineTest {
 
         Queries queries = new Queries(new Query(queryKeywords, 1));
         WebAppPages webAppPages = new WebAppPages(new WebAppPage(pageKeywords, 1));
-        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+        SearchEngine searchEngine = new SearchEngine(webAppPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         Assert.assertEquals(0, queryOneResult.size());
@@ -44,9 +44,9 @@ public class SearchEngineTest {
         WebAppPage webAppPage1 = new WebAppPage(pageKeywords1, 2);
         WebAppPages webAppPages = new WebAppPages(webAppPage, webAppPage1);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+        SearchEngine searchEngine = new SearchEngine(webAppPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         List queryTwoResult = (List) resultPageNumbers.get("Q2");
@@ -66,9 +66,9 @@ public class SearchEngineTest {
         Queries queries = new Queries(new Query(queryKeywords, 1));
         WebAppPages webAppPages = new WebAppPages(new WebAppPage(pageKeywords, 1));
 
-        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+        SearchEngine searchEngine = new SearchEngine(webAppPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         Assert.assertEquals(1, queryOneResult.size());
@@ -83,9 +83,9 @@ public class SearchEngineTest {
         Queries queries = new Queries(new Query(queryKeywords, 1));
         WebAppPages webAppPages = new WebAppPages(new WebAppPage(pageKeywords, 1));
 
-        SearchEngine searchEngine = new SearchEngine(queries, webAppPages);
+        SearchEngine searchEngine = new SearchEngine(webAppPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         Assert.assertEquals(1, queryOneResult.size());
@@ -103,9 +103,9 @@ public class SearchEngineTest {
         WebAppPages webPages = new WebAppPages(lcmeWebPage, lcmeWebPage1);
 
         Queries queries = new Queries(new Query(queryKeywords, 1));
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         Assert.assertEquals(2, queryOneResult.size());
@@ -125,9 +125,9 @@ public class SearchEngineTest {
         WebAppPage lcmeWebPage1 = new WebAppPage(keywords1, 2);
         WebAppPages webPages = new WebAppPages(lcmeWebPage, lcmeWebPage1);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         List queryTwoResult = (List) resultPageNumbers.get("Q2");
@@ -158,9 +158,9 @@ public class SearchEngineTest {
         WebAppPage p2 = new WebAppPage(pageKeywords1, 2);
         WebAppPages webPages = new WebAppPages(p1, p2);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
         List queryTwoResult = (List) resultPageNumbers.get("Q2");
@@ -197,9 +197,9 @@ public class SearchEngineTest {
         WebAppPage p6 = new WebAppPage(pageKeywords6, 6);
         WebAppPages webPages = new WebAppPages(p1, p2, p3, p4, p5, p6);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
 
@@ -237,9 +237,9 @@ public class SearchEngineTest {
         WebAppPage p6 = new WebAppPage(pageKeywords6, 6);
         WebAppPages webPages = new WebAppPages(p1, p2, p3, p4, p5, p6);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         List queryOneResult = (List) resultPageNumbers.get("Q1");
 

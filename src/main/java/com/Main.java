@@ -40,9 +40,9 @@ public class Main {
         WebAppPage p6 = new WebAppPage(pageKeywords6, 6);
         WebAppPages webPages = new WebAppPages(p1, p2, p3, p4, p5, p6);
 
-        SearchEngine searchEngine = new SearchEngine(queries, webPages);
+        SearchEngine searchEngine = new SearchEngine(webPages);
 
-        Map resultPageNumbers = searchEngine.search();
+        Map resultPageNumbers = searchEngine.search(queries);
 
         System.out.println(resultPageNumbers);
     }

@@ -34,6 +34,8 @@ public class WebAppPages {
         return pageNumbers.size()>LIMIT_OF_RESULT ? pageNumbers.subList(START_OF_RESULT, LIMIT_OF_RESULT):pageNumbers;
     }
 
+
+
     public Map sortByRelevence(Map pageNumbersWithRelevance )
     {
         List<Map.Entry<String, Integer>> pageNumbersRelevanceEntry = new LinkedList(pageNumbersWithRelevance.entrySet() );

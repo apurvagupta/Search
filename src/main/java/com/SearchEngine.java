@@ -6,16 +6,14 @@ import java.util.Map;
  * Created by apurvagu on 16/12/16.
  */
 public class SearchEngine {
-    private Queries queries;
     private WebAppPages webAppPages;
     public static final Integer MAXIMUM_WEIGHT = 8;
 
-    public SearchEngine(Queries queries, WebAppPages webAppPages) {
-        this.queries = queries;
+    public SearchEngine(WebAppPages webAppPages) {
         this.webAppPages = webAppPages;
     }
 
-    public Map search() {
+    public Map search(Queries queries) {
         Map result = queries.searchResultsIn(webAppPages);
         return result;
     }

@@ -8,7 +8,7 @@ import static com.SearchEngine.MAXIMUM_WEIGHT;
 /**
  * Created by apurvagu on 16/12/16.
  */
-public class WebAppPage extends Relevance {
+public class WebAppPage {
 
     private List keywords;
     private Integer pageNumber;
@@ -24,7 +24,7 @@ public class WebAppPage extends Relevance {
     }
 
     public Integer queryRelevance(Query query){
-        relevance = calculateRelevance(toLower(query.getKeyWords()), toLower(keywords));
+        relevance = Relevance.calculateRelevance(toLower(query.getKeyWords()), toLower(keywords));
         return relevance;
     }
 

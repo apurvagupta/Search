@@ -8,13 +8,13 @@ import static com.SearchEngine.MAXIMUM_WEIGHT;
 /**
  * Created by apurvagu on 17/12/16.
  */
-public abstract class Relevance {
+public class Relevance {
 
-    public Integer calculateRelevance(List queryKeywords, List webAppPageKeywords) {
+    public static Integer calculateRelevance(List queryKeywords, List webAppPageKeywords) {
         return Collections.disjoint(webAppPageKeywords, queryKeywords)? 0 : calculate(queryKeywords, webAppPageKeywords);
     }
 
-    protected Integer calculate(List<String>queryKeywords, List<String> webAppPageKeywords){
+    protected static Integer calculate(List<String> queryKeywords, List<String> webAppPageKeywords){
         int relevance =0;
         for(String webAppPageKeyword:webAppPageKeywords){
             if(queryKeywords.contains(webAppPageKeyword)){
