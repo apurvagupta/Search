@@ -18,13 +18,13 @@ public class WebAppPages {
     public List getPageNumbersWith(Query query) {
         Map pageNumbersWithRelevance = new TreeMap();
         for (WebAppPage webAppPage : webPages){
-            Integer relevance = webAppPage.queryRelevance(query);
-            if(relevance != 0) {
+            RelevanceData relevance = webAppPage.queryRelevance(query);
+            if(!relevance.equals(new RelevanceData(0.0))) {
                 pageNumbersWithRelevance.put(webAppPage.getPageNumber(), relevance);
 
             }
         }
-        Map pageNumbersWithSortedRelevance = sortByRelevence(pageNumbersWithRelevance);
+        Map pageNumbersWithSortedRelevance = sortByRelevance(pageNumbersWithRelevance);
         ArrayList pageNumbers = new ArrayList(pageNumbersWithSortedRelevance.keySet());
 
         return limitResult(pageNumbers);
@@ -36,18 +36,18 @@ public class WebAppPages {
 
 
 
-    public Map sortByRelevence(Map pageNumbersWithRelevance )
+    public Map sortByRelevance(Map pageNumbersWithRelevance )
     {
-        List<Map.Entry<String, Integer>> pageNumbersRelevanceEntry = new LinkedList(pageNumbersWithRelevance.entrySet() );
-        Collections.sort( pageNumbersRelevanceEntry, new Comparator<Map.Entry<String, Integer>>()
+        List<Map.Entry<String, RelevanceData>> pageNumbersRelevanceEntry = new LinkedList(pageNumbersWithRelevance.entrySet() );
+        Collections.sort( pageNumbersRelevanceEntry, new Comparator<Map.Entry<String, RelevanceData>>()
         {
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+            public int compare(Map.Entry<String, RelevanceData> o1, Map.Entry<String, RelevanceData> o2) {
                 return ( o2.getValue() ).compareTo( o1.getValue());
             }
         });
 
         Map result = new LinkedHashMap ();
-        for ( Map.Entry<String, Integer> entry : pageNumbersRelevanceEntry)
+        for ( Map.Entry<String, RelevanceData> entry : pageNumbersRelevanceEntry)
         {
             result.put(entry.getKey(), entry.getValue() );
         }

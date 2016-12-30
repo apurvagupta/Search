@@ -253,5 +253,36 @@ public class SearchEngineTest {
 
     }
 
+    @Test
+    public void shouldReturnWebPagesWhenQueryStringsMatchInNestedPages() {
+        List keywords = Arrays.asList("Ford");
+        List keywords1 = Arrays.asList("Car", "Review");
+
+        List queryKeywords = Arrays.asList("Car", "Review");
+        List queryKeywords1 = Arrays.asList("Review");
+
+        Queries queries = new Queries(new Query(queryKeywords, 1),new Query(queryKeywords1, 2));
+        WebAppPage lcmeWebPage = new WebAppPage(keywords, 1);
+        WebAppPage childWebPage = new WebAppPage(keywords1, 1);
+        lcmeWebPage.addChildren(childWebPage);
+
+        WebAppPages webPages = new WebAppPages(lcmeWebPage);
+
+        SearchEngine searchEngine = new SearchEngine(webPages);
+
+        Map resultPageNumbers = searchEngine.search(queries);
+
+        List queryOneResult = (List) resultPageNumbers.get("Q1");
+        List queryTwoResult = (List) resultPageNumbers.get("Q2");
+
+
+        Assert.assertEquals(1, queryOneResult.size());
+        Assert.assertEquals("P1", queryOneResult.get(0));
+
+        Assert.assertEquals(1, queryTwoResult.size());
+        Assert.assertEquals("P1", queryTwoResult.get(0));
+
+    }
+
 
 }
